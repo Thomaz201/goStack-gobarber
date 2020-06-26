@@ -32,5 +32,5 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 });
 
 app.listen(3333, () => {
-  console.log('Servidor Iniciado 🚀 o(*^＠^*)o');
+  console.log('Servidor Iniciado na porta 3333 🚀 o(*^＠^*)o');
 });
