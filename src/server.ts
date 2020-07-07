@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 import 'express-async-errors';
 
 import routes from './routes/index';
@@ -11,6 +12,7 @@ import './database/index';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
@@ -31,6 +33,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-app.listen(3333, () => {
-  console.log('Servidor Iniciado na porta 3333 🚀 o(*^＠^*)o');
+app.listen(3333, '0.0.0.0', () => {
+  console.log('🚀 Servidor Iniciado na porta 3333 🚀 o(*^＠^*)o');
 });
