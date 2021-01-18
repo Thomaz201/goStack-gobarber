@@ -12,7 +12,9 @@ class FakeUserTokensRepository implements IUserTokensRepository {
     Object.assign(userToken, {
       id: v4(),
       token: v4(),
-      user_id
+      user_id,
+      created_at: new Date(),
+      updated_at: new Date(),
     });
 
     this.userTokens.push(userToken);
@@ -20,7 +22,13 @@ class FakeUserTokensRepository implements IUserTokensRepository {
     return userToken;
   }
 
+  public async findUserByToken(token: string): Promise<UserToken | undefined> {
+    const userToken = this.userTokens.find(
+      findToken => findToken.token === token,
+    );
 
+    return userToken;
+  }
 }
 
 export default FakeUserTokensRepository;
