@@ -1,14 +1,20 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import ListProvidersService from './ListProvidersService';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 
 let fakeUsersRepository: FakeUsersRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let listProfilesService: ListProvidersService;
 
 describe('ListProviders tests', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
-    listProfilesService = new ListProvidersService(fakeUsersRepository);
+    listProfilesService = new ListProvidersService(
+      fakeUsersRepository,
+      fakeCacheProvider,
+    );
   });
 
   it('should be able to list the providers', async () => {
@@ -34,6 +40,11 @@ describe('ListProviders tests', () => {
       user_id: loggedUser.id,
     });
 
+    const cachedProviders = await listProfilesService.execute({
+      user_id: loggedUser.id,
+    });
+
     expect(providers).toEqual([user1, user2]);
+    expect(cachedProviders).toEqual([user1, user2]);
   });
 });
