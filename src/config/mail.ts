@@ -14,8 +14,8 @@ export default {
 
   defaults: {
     from: {
-      email: 'lucasthomaz@keebs.com.br',
-      name: 'Thomaz do keebs',
+      email: 'lucasthomaz@mustachio.com.br',
+      name: 'Thomaz do Mustachio',
     },
   },
 } as IMailConfig;

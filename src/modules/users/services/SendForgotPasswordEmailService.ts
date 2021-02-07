@@ -13,11 +13,11 @@ interface IRequest {
 @injectable()
 class SendForgotPasswordEmailService {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
-
     @inject('MailProvider')
     private mailProvider: IMailProvider,
+
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
 
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
