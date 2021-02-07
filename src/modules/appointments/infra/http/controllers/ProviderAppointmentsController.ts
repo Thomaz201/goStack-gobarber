@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-import { parseISO } from 'date-fns';
 import { container } from 'tsyringe';
 
 import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 
 export default class ProviderAppointmentsController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { day, month, year } = request.body;
+    const { day, month, year } = request.query;
     const provider_id = request.user.id;
 
     const listProviderAppointmentsService = container.resolve(
@@ -14,9 +13,9 @@ export default class ProviderAppointmentsController {
     );
 
     const appointment = await listProviderAppointmentsService.execute({
-      day,
-      month,
-      year,
+      day: Number(day),
+      month: Number(month),
+      year: Number(year),
       provider_id,
     });
 
