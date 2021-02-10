@@ -1,6 +1,7 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import ListProvidersService from './ListProvidersService';
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
+import { classToClass } from 'class-transformer';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeCacheProvider: FakeCacheProvider;
@@ -44,7 +45,10 @@ describe('ListProviders tests', () => {
       user_id: loggedUser.id,
     });
 
+    const parsedUser1 = classToClass(user1);
+    const parsedUser2 = classToClass(user2);
+
     expect(providers).toEqual([user1, user2]);
-    expect(cachedProviders).toEqual([user1, user2]);
+    expect(cachedProviders).toEqual([parsedUser1, parsedUser2]);
   });
 });
